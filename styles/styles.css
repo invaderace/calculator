@@ -1,0 +1,39 @@
+body {
+  text-align: center;
+}
+
+#calc-container {
+  border: 1px black solid;
+  width: 300px;
+  height: auto;
+}
+
+.row {
+}
+
+.display {
+  width: 290px;
+  height: 68px;
+  border: 1px black solid;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.button {
+  display: inline-block;
+  height: 68px;
+  border: 1px black solid;
+  margin-bottom: 3px;
+}
+
+.double-width {
+  width: 142px;
+}
+
+.square {
+  width: 68px;
+}
+
+div {
+  margin: auto;
+}
