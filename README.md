@@ -2,7 +2,7 @@ Copied from https://www.theodinproject.com/courses/web-development-101/lessons/c
 
 Your calculator is going to contain functions for all of the basic math operators you typically find on simple calculators, so start by creating functions for the following items and testing them in your browser’s console.
 
-add
+add 
 subtract
 multiply
 divide
