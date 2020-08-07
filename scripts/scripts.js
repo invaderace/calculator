@@ -77,7 +77,7 @@ function checkInput () {
       operator = input;
       a = result;
       b = "0";
-      output = a.toString();
+      output = a;
     };
   };
 
@@ -98,6 +98,16 @@ function checkInput () {
 
   if (isAllClear()) {
     reset();
+  };
+
+  if (isBackspace()) {
+    if (operator == "") {
+      a = a.slice(0, a.length - 1);
+      output = a;
+    } else {
+      b = b.slice(0, b.length - 1);
+      output = b;
+    };
   };
 
   displayValue();
