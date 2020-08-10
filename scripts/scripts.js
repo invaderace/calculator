@@ -5,6 +5,7 @@ let a = 0;
 let b = 0;
 let operator = "";
 let result;
+const exponent = /e+/g;
 
 const display = document.querySelector('.display')
 display.textContent = 0;
@@ -30,21 +31,17 @@ const buttons = document.querySelectorAll('.button');
 
 buttons.forEach(button => button.onclick = function() {
   input = button.id
-  // calculator();
   checkInput();
 });
 
 window.addEventListener('keydown', function(e) {
   input =  e.key;
-  // calculator();
   checkInput();
 });
 
 function checkInput () {
-  console.log(input)
 
   if (isNumber()) {
-    console.log('for real it is.')
     if (operator == "") {
       if (a == "0") {
         a = input;
@@ -73,7 +70,6 @@ function checkInput () {
       a = Number(a);
       b = Number(b);
       operate(operator, a, b);
-      console.log(result)
       operator = input;
       a = result;
       b = "0";
@@ -81,24 +77,17 @@ function checkInput () {
     };
   };
 
-  console.log("a is: " + a);
-  console.log("b is: " + b);
-  console.log("operator is: " + operator);
-
   if (isEquals()) {
     a = Number(a);
     b = Number(b);
     operate(operator, a, b);
-    console.log(result)
     operator = input;
     a = result;
     b = "0";
-    output = a.toString();
+    output = a;
   };
 
-  if (isAllClear()) {
-    reset();
-  };
+  isAllClear();
 
   if (isBackspace()) {
     if (operator == "") {
@@ -110,13 +99,28 @@ function checkInput () {
     };
   };
 
+  if (exponent.test(output) == true) {
+    const exponentStart = exponent.lastIndex - 2;
+    console.log(exponent.lastIndex);
+    console.log(exponentStart);
+    output = output.slice(0,10) + output.slice(exponentStart)
+    /* make it so output is the first several digits plus e... */
+  };
+
+  if (output.length > 16) {
+    output = output.slice(0, 16);
+  };
+
+  if (output == Infinity) {
+    output = "That's Impossible."
+  };
+
   displayValue();
 };
 
 const isNumber = function () {
   const num = /[0-9]/
   if (num.test(input)) {
-    console.log('you hit a number')
     //*add to current output, need to test for current 0.*//
     return true;
   };
@@ -124,15 +128,13 @@ const isNumber = function () {
 
 const isOperator = function () {
   if (input == "+" || input == "-" || input == "*" || input == "/") {
-    console.log('you hit an operator');
     //*make this the operator, test for if there is previously an operator, if so, operate, if not, just hold it a minute.*//
     return true;
   };
 };
 
-function isEquals() {
+const isEquals = function () {
   if (input == "=" || input == "Enter") {
-    console.log('equals button');
     //*operate dammit.*//
     return true;
   };
@@ -159,13 +161,7 @@ const addPoint = () => {
 
 const isAllClear = () => {
   if (input == "all-clear") {
-    return true;
-  };
-};
-
-const isBackspace = () => {
-  if (input == "Backspace") {
-    return true;
+    reset();
   };
 };
 
@@ -174,6 +170,12 @@ const reset = () => {
   b = 0;
   operator = "";
   output = 0;
+};
+
+const isBackspace = () => {
+  if (input == "Backspace") {
+    return true;
+  };
 };
 
 function displayValue () {
