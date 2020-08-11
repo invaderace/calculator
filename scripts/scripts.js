@@ -73,7 +73,7 @@ function checkInput () {
       operator = input;
       a = result;
       b = "0";
-      output = a;
+      output = a.toString();
     };
   };
 
@@ -84,7 +84,7 @@ function checkInput () {
     operator = input;
     a = result;
     b = "0";
-    output = a;
+    output = a.toString();
   };
 
   isAllClear();
